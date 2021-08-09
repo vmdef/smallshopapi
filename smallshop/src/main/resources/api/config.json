@@ -1,0 +1,17 @@
+{
+  "library": "spring-mvc",
+  "dateLibrary": "java11",
+  "hideGenerationTimestamp": true,
+  "modelPackage": "com.amtest.smallshop.api.model",
+  "apiPackage": "com.amtest.smallshop.api",
+  "invokerPackage": "com.amtest.smallshop.api",
+  "serializableModel": true,
+  "useTags": true,
+  "useGzipFeature" : true,
+  "hateoas": true,
+  "withXml": true,
+  "importMappings": {
+    "ResourceSupport":"org.springframework.hateoas.RepresentationModel",
+    "Link": "org.springframework.hateoas.Link"
+  }
+}
