@@ -183,7 +183,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResponse'
+                $ref: '#/components/schemas/ModelApiResponse'
       security:
       - smallshop_auth:
         - write:customers
@@ -244,9 +244,6 @@ paths:
                 type: string
                 format: date-time
           content:
-            application/xml:
-              schema:
-                type: string
             application/json:
               schema:
                 type: string
@@ -288,9 +285,6 @@ paths:
         200:
           description: successful operation
           content:
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/User'
             application/json:
               schema:
                 $ref: '#/components/schemas/User'
@@ -397,7 +391,7 @@ components:
           type: string
         isadmin:
           type: boolean
-    ApiResponse:
+    ModelApiResponse:
       type: object
       properties:
         code:
