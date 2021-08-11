@@ -10,7 +10,7 @@ public class CustomerEntity {
     @Id
     @GeneratedValue
     @Column(name="ID", updatable = false, nullable = false)
-    private UUID id;
+    private Long id;
 
     @NotNull(message = "User name is required.")
     @Basic(optional = false)
@@ -25,11 +25,11 @@ public class CustomerEntity {
     @Column(name = "photourl")
     private String photourl;
 
-    public UUID getId() {
+    public Long getId() {
         return id;
     }
 
-    public CustomerEntity setId(UUID id) {
+    public CustomerEntity setId(Long id) {
         this.id = id;
         return this;
     }

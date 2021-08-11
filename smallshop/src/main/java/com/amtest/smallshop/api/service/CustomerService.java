@@ -5,5 +5,5 @@ import com.amtest.smallshop.entity.CustomerEntity;
 import java.util.Optional;
 
 public interface CustomerService {
-    public Optional<CustomerEntity> getCustomerById(String customerId);
+    public Optional<CustomerEntity> getCustomerById(Long customerId);
 }

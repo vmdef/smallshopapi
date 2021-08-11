@@ -11,5 +11,5 @@ import java.util.UUID;
 public interface CustomerRepository extends CrudRepository<CustomerEntity, UUID> {
     // TODO join user by creatorId
     @Query("select c from CustomerEntity c")
-    public Optional<CustomerEntity> findByCustomerId(@Param("customerId") UUID customerId);
+    public Optional<CustomerEntity> findByCustomerId(@Param("customerId") Long customerId);
 }
