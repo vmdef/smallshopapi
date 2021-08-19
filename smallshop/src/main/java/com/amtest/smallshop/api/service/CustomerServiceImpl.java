@@ -1,7 +1,7 @@
 package com.amtest.smallshop.api.service;
 
 import com.amtest.smallshop.api.repository.CustomerRepository;
-import com.amtest.smallshop.entity.CustomerEntity;
+import com.amtest.smallshop.api.entity.CustomerEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -16,7 +16,7 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public Optional<CustomerEntity> getCustomerById(Long customerId) {
-        return repository.findByCustomerId(customerId);
+    public Optional<CustomerEntity> getCustomerById(UUID customerId) {
+        return repository.getCustomerById(customerId);
     }
 }
