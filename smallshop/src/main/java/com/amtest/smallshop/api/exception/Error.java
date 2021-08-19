@@ -1,12 +1,8 @@
-package com.amtest.smallshop.api.exceptions;
+package com.amtest.smallshop.api.exception;
 
+import java.time.Instant;
 import org.apache.logging.log4j.util.Strings;
 
-/**
- * Error
- * <p>
- * Complex type that contains error details for a REST API calls.
- **/
 public class Error {
 
     private static final long serialVersionUID = 1L;
@@ -34,6 +30,11 @@ public class Error {
      * Method of request that produced the error.
      */
     private String reqMethod = "Not available";
+
+    /**
+     * Timestamp
+     */
+    private Instant timestamp;
 
     public String getErrorCode() {
         return errorCode;
@@ -78,6 +79,15 @@ public class Error {
         if (Strings.isNotBlank(method)) {
             this.reqMethod = method;
         }
+        return this;
+    }
+
+    public Instant getTimestamp() {
+        return timestamp;
+    }
+
+    public Error setTimestamp(Instant timestamp) {
+        this.timestamp = timestamp;
         return this;
     }
 }

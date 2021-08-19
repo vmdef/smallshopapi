@@ -1,4 +1,4 @@
-package com.amtest.smallshop.api.exceptions;
+package com.amtest.smallshop.api.exception;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import java.util.Locale;

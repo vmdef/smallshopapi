@@ -1,4 +1,4 @@
-package com.amtest.smallshop.api.exceptions;
+package com.amtest.smallshop.api.exception;
 
 public class ErrorUtils {
 
@@ -11,7 +11,6 @@ public class ErrorUtils {
      * @param errMsgKey
      * @param errorCode
      * @param httpStatusCode
-     * @param url
      * @return error
      */
     public static Error createError(final String errMsgKey, final String errorCode,
