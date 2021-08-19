@@ -32,7 +32,7 @@ paths:
         - customer
       summary: Returns the small shop customers
       description: Returns all the small shop customers
-      operationId: getCustomers
+      operationId: getAllCustomers
       responses:
         200:
           description: Small shop customers
@@ -42,9 +42,6 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Customer'
-        404:
-          description: Order doesn't exist for given user.
-          content: {}
       security:
       - smallshop_auth:
         - write:customers
@@ -108,8 +105,8 @@ paths:
         description: ID of customer to return
         required: true
         schema:
-          type: integer
-          format: int64
+          type: string
+          format: uuid
       responses:
         200:
           description: successful operation
@@ -138,8 +135,8 @@ paths:
         description: Customer id to delete
         required: true
         schema:
-          type: integer
-          format: int64
+          type: string
+          format: uuid
       responses:
         400:
           description: Invalid ID supplied
@@ -163,8 +160,8 @@ paths:
         description: ID of customer to update
         required: true
         schema:
-          type: integer
-          format: int64
+          type: string
+          format: uuid
       requestBody:
         content:
           multipart/form-data:
@@ -405,10 +402,11 @@ paths:
           content:
             application/json:
               schema:
-              $ref: '#/components/schemas/SignedInUser'
+                $ref: '#/components/schemas/SignedInUser'
 components:
   schemas:
     Customer:
+      description: A Small Shop customer
       required:
         - id
         - name
@@ -416,33 +414,37 @@ components:
       type: object
       properties:
         id:
-          type: integer
-          format: int64
+          type: string
+          format: uuid
         name:
           type: string
         surname:
           type: string
-        photourl:
+        photo:
           type: string
-        creatorId:
-          type: integer
-          format: int64
+        createdBy:
+          type: string
+          format: uuid
+        modifiedBy:
+          type: string
+          format: uuid
     User:
+      description: A Small Shop CRM user
       required:
         - id
-        - name
-        - surname
-        - isAdmin
+        - username
+        - password
+        - adminStatus
       type: object
       properties:
         id:
-          type: integer
-          format: int64
-        name:
           type: string
-        surname:
+          format: uuid
+        username:
           type: string
-        isadmin:
+        password:
+          type: string
+        adminStatus:
           type: boolean
     SignInReq:
       description: Request body for Sign-in
