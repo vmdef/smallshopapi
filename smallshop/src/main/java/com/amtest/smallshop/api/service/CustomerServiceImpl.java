@@ -19,4 +19,9 @@ public class CustomerServiceImpl implements CustomerService {
     public Optional<CustomerEntity> getCustomerById(UUID customerId) {
         return repository.getCustomerById(customerId);
     }
+
+    @Override
+    public Iterable<CustomerEntity> getCustomers() {
+        return repository.findAll();
+    }
 }

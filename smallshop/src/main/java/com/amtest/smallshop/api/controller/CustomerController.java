@@ -9,9 +9,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
 import java.util.UUID;
 
 import static org.springframework.http.ResponseEntity.notFound;
+import static org.springframework.http.ResponseEntity.ok;
 
 @RestController
 public class CustomerController implements CustomerApi {
@@ -27,6 +29,11 @@ public class CustomerController implements CustomerApi {
     @Override
     public ResponseEntity<Customer> getCustomerById(UUID customerId) {
         return service.getCustomerById(customerId).map(assembler::toModel).map(ResponseEntity::ok).orElse(notFound().build());
+    }
+
+    @Override
+    public ResponseEntity<List<Customer>> getCustomers() {
+        return ok(assembler.toListModel(service.getCustomers()));
     }
 
     //TODO implement other methods

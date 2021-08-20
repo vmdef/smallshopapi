@@ -32,7 +32,7 @@ paths:
         - customer
       summary: Returns the small shop customers
       description: Returns all the small shop customers
-      operationId: getAllCustomers
+      operationId: getCustomers
       responses:
         200:
           description: Small shop customers
