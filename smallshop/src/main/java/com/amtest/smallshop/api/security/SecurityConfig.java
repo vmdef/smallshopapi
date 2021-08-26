@@ -103,8 +103,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 /* TODO create user restricted to Admins
                 .mvcMatchers(HttpMethod.POST, "/api/v1/user/**")
                 .hasAuthority(RoleEnum.ADMIN.getAuthority())*/
-                // TODO Uncomment to enable security
-                // .anyRequest().authenticated()
+                .anyRequest().authenticated()
                 .and()
                 .oauth2ResourceServer(oauth2ResourceServer -> oauth2ResourceServer.jwt(
                         jwt -> jwt.jwtAuthenticationConverter(getJwtAuthenticationConverter())))
