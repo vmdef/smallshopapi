@@ -100,10 +100,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST, SIGNUP_URL).permitAll()
                 .antMatchers(HttpMethod.POST, REFRESH_URL).permitAll()
                 .antMatchers(H2_URL_PREFIX).permitAll()
-                /*TODO create user restricted to Admins
+                /* TODO create user restricted to Admins
                 .mvcMatchers(HttpMethod.POST, "/api/v1/user/**")
                 .hasAuthority(RoleEnum.ADMIN.getAuthority())*/
-                .anyRequest().authenticated()
+                // TODO Uncomment to enable security
+                // .anyRequest().authenticated()
                 .and()
                 .oauth2ResourceServer(oauth2ResourceServer -> oauth2ResourceServer.jwt(
                         jwt -> jwt.jwtAuthenticationConverter(getJwtAuthenticationConverter())))

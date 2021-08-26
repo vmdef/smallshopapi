@@ -76,7 +76,7 @@ paths:
       tags:
       - customer
       summary: Add a new shop customer
-      operationId: addCustomer
+      operationId: createCustomer
       requestBody:
         description: Customer object that needs to be added to the store
         content:
@@ -85,6 +85,12 @@ paths:
               $ref: '#/components/schemas/Customer'
         required: true
       responses:
+        200:
+          description: Succesful creation.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Customer'
         405:
           description: Invalid input
           content: {}

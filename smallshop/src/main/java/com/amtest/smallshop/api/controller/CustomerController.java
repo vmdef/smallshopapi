@@ -6,14 +6,15 @@ import com.amtest.smallshop.api.model.Customer;
 import com.amtest.smallshop.api.service.CustomerService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.UUID;
 
-import static org.springframework.http.ResponseEntity.notFound;
-import static org.springframework.http.ResponseEntity.ok;
+import static org.springframework.http.ResponseEntity.*;
 
 @RestController
 public class CustomerController implements CustomerApi {
@@ -34,6 +35,11 @@ public class CustomerController implements CustomerApi {
     @Override
     public ResponseEntity<List<Customer>> getCustomers() {
         return ok(assembler.toListModel(service.getCustomers()));
+    }
+
+    @Override
+    public ResponseEntity<Customer> createCustomer(@Valid Customer customer) {
+        return status(HttpStatus.CREATED).body(service.createCustomer(customer).map(assembler::toModel).get());
     }
 
     //TODO implement other methods

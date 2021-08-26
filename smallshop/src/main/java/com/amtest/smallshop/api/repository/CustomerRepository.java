@@ -9,6 +9,9 @@ import java.util.Optional;
 import java.util.UUID;
 
 public interface CustomerRepository extends CrudRepository<CustomerEntity, UUID> {
-
     Optional<CustomerEntity> getCustomerById(UUID customerId);
+
+    @Query("select c from CustomerEntity c")
+    Optional<CustomerEntity> findCustomerByName(String name);
+
 }
