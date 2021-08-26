@@ -1,8 +1,11 @@
 package com.amtest.smallshop.api.controller;
 
 import com.amtest.smallshop.api.entity.CustomerEntity;
+import com.amtest.smallshop.api.entity.RoleEnum;
+import com.amtest.smallshop.api.entity.UserEntity;
 import com.amtest.smallshop.api.exception.RestApiErrorHandler;
 import com.amtest.smallshop.api.hateoas.CustomerRepresentationModelAssembler;
+import com.amtest.smallshop.api.hateoas.UserRepresentationModelAssembler;
 import com.amtest.smallshop.api.service.CustomerService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
@@ -33,18 +36,26 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class CustomerControllerTest {
     private static final String URI = "/api/v1/customers";
     private static final String id = "a1b9b31d-e73c-4112-af7c-b68530f38222";
+    private static final String userId = "30f38222-e73c-4112-af7c-b685a1b9b31d";
     private static CustomerService service = mock(CustomerService.class);
     private static CustomerController controller;
     private static MockMvc mockMvc;
     private static MessageSource msgSource = mock(MessageSource.class);
     private static CustomerEntity entity;
     private static Customer customer;
+    private static UserRepresentationModelAssembler uAssembler = mock(UserRepresentationModelAssembler.class);
 
 
     @BeforeEach
     public void setup() {
         JacksonTester.initFields(this, new ObjectMapper());
-        controller = new CustomerController(service, new CustomerRepresentationModelAssembler());
+/*        userEntity = new UserEntity()
+                .setId(UUID.fromString(userId))
+                .setUsername("user")
+                .setPassword("password")
+                .setRole(RoleEnum.USER);*/
+
+        controller = new CustomerController(service, new CustomerRepresentationModelAssembler(uAssembler));
         mockMvc = MockMvcBuilders.standaloneSetup(controller)
                 .setControllerAdvice(new RestApiErrorHandler(msgSource))
                 .alwaysDo(print())

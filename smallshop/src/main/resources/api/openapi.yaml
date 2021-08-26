@@ -429,11 +429,9 @@ components:
         photo:
           type: string
         createdBy:
-          type: string
-          format: uuid
+          $ref: '#/components/schemas/User'
         modifiedBy:
-          type: string
-          format: uuid
+          $ref: '#/components/schemas/User'
     User:
       description: A Small Shop CRM user
       required:

@@ -42,6 +42,12 @@ public class UserEntity {
     @Enumerated(EnumType.STRING)
     private RoleEnum role = RoleEnum.USER;
 
+    @OneToMany(mappedBy = "createdBy", fetch = FetchType.LAZY)
+    private List<CustomerEntity> createdUsers;
+
+    @OneToMany(mappedBy = "modifiedBy", fetch = FetchType.LAZY)
+    private List<CustomerEntity> modifiedUsers;
+
     public UUID getId() {
         return id;
     }
@@ -87,6 +93,22 @@ public class UserEntity {
         return this;
     }
 
+    public List<CustomerEntity> getCreatedUsers() {
+        return createdUsers;
+    }
+
+    public void setCreatedUsers(List<CustomerEntity> createdUsers) {
+        this.createdUsers = createdUsers;
+    }
+
+    public List<CustomerEntity> getModifiedUsers() {
+        return modifiedUsers;
+    }
+
+    public void setModifiedUsers(List<CustomerEntity> modifiedUsers) {
+        this.modifiedUsers = modifiedUsers;
+    }
+
     @Override
     public String toString() {
         return "UserEntity{" +
@@ -97,4 +119,5 @@ public class UserEntity {
                 ", role=" + role +
                 '}';
     }
+
 }

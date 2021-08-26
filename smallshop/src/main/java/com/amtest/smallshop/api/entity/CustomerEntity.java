@@ -1,22 +1,7 @@
 package com.amtest.smallshop.api.entity;
 
-import java.util.Collections;
-import java.util.List;
 import java.util.UUID;
-import javax.persistence.Basic;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -39,6 +24,14 @@ public class CustomerEntity {
 
     @Column(name = "PHOTO")
     private String photo;
+
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "CREATED_BY", updatable = false, nullable = false)
+    private UserEntity createdBy;
+
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "MODIFIED_BY", nullable = false)
+    private UserEntity modifiedBy;
 
     public UUID getId() {
         return id;
@@ -77,6 +70,21 @@ public class CustomerEntity {
         return this;
     }
 
+    public UserEntity getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(UserEntity createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    public UserEntity getModifiedBy() {
+        return modifiedBy;
+    }
+
+    public void setModifiedBy(UserEntity modifiedBy) {
+        this.modifiedBy = modifiedBy;
+    }
 
     @Override
     public String toString() {
@@ -85,6 +93,9 @@ public class CustomerEntity {
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
                 ", phone='" + photo + '\'' +
+                ", createdBy='" + createdBy + '\'' +
+                ", modifiedBy='" + modifiedBy + '\'' +
                 '}';
     }
+
 }
