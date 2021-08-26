@@ -25,11 +25,11 @@ public class CustomerEntity {
     @Column(name = "PHOTO")
     private String photo;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "CREATED_BY", updatable = false, nullable = false)
     private UserEntity createdBy;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "MODIFIED_BY", nullable = false)
     private UserEntity modifiedBy;
 

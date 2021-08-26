@@ -38,6 +38,12 @@ public class CustomerController implements CustomerApi {
     }
 
     @Override
+    public ResponseEntity<Void> deleteCustomerById(UUID id) {
+        service.deleteCustomerById(id);
+        return accepted().build();
+    }
+
+    @Override
     public ResponseEntity<Customer> createCustomer(@Valid Customer customer) {
         return status(HttpStatus.CREATED).body(service.createCustomer(customer).map(assembler::toModel).get());
     }

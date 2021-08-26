@@ -134,7 +134,7 @@ paths:
       tags:
       - customer
       summary: Deletes a customer
-      operationId: deleteCustomer
+      operationId: deleteCustomerById
       parameters:
       - name: customerId
         in: path

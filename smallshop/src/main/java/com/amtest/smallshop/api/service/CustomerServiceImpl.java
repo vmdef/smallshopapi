@@ -31,6 +31,11 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
+    public void deleteCustomerById(UUID customerId) {
+        repository.deleteById(customerId);
+    }
+
+    @Override
     @Transactional
     public Optional<CustomerEntity> createCustomer(Customer customer) {
         //TODO we need a check to avoid duplicate customers (email)

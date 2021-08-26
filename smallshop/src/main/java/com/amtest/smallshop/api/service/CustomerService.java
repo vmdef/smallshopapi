@@ -9,5 +9,6 @@ import java.util.UUID;
 public interface CustomerService {
     public Optional<CustomerEntity> getCustomerById(UUID customerId);
     public Iterable<CustomerEntity> getCustomers();
+    void deleteCustomerById(UUID customerId);
     Optional<CustomerEntity> createCustomer(Customer customer);
 }
