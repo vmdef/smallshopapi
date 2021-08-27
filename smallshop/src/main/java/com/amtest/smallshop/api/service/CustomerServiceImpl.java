@@ -1,13 +1,17 @@
 package com.amtest.smallshop.api.service;
 
+import com.amtest.smallshop.api.exception.CustomerNotFoundException;
 import com.amtest.smallshop.api.exception.GenericAlreadyExistsException;
 import com.amtest.smallshop.api.model.Customer;
 import com.amtest.smallshop.api.repository.CustomerRepository;
 import com.amtest.smallshop.api.entity.CustomerEntity;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.security.Principal;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
@@ -22,7 +26,11 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public Optional<CustomerEntity> getCustomerById(UUID customerId) {
-        return repository.getCustomerById(customerId);
+        Optional<CustomerEntity> customer = repository.getCustomerById(customerId);
+        if (!customer.isPresent()) {
+            throw new CustomerNotFoundException("UUID: " + customerId);
+        }
+        return customer;
     }
 
     @Override
@@ -47,8 +55,9 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     @Transactional
-    public CustomerEntity saveCustomer(CustomerEntity customer) {
-        return repository.save(customer);
+    public CustomerEntity saveCustomer(Customer customer) {
+
+        return repository.save(toEntity(customer));
     }
 
     private CustomerEntity toEntity(Customer customer) {

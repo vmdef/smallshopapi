@@ -11,5 +11,5 @@ public interface CustomerService {
     public Iterable<CustomerEntity> getCustomers();
     void deleteCustomerById(UUID customerId);
     Optional<CustomerEntity> createCustomer(Customer customer);
-    public CustomerEntity saveCustomer(CustomerEntity customer);
+    public CustomerEntity saveCustomer(Customer customer);
 }

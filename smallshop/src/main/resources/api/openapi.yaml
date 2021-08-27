@@ -46,32 +46,6 @@ paths:
       - smallshop_auth:
         - write:customers
         - read:customers
-    put:
-      tags:
-      - customer
-      summary: Update an existing customer
-      operationId: updateCustomer
-      requestBody:
-        description: Customers object that needs to be added to the store
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Customer'
-        required: true
-      responses:
-        400:
-          description: Invalid ID supplied
-          content: {}
-        404:
-          description: Customer not found
-          content: {}
-        405:
-          description: Validation exception
-          content: {}
-      security:
-      - smallshop_auth:
-        - write:customers
-        - read:customers
     post:
       tags:
       - customer
@@ -154,6 +128,40 @@ paths:
       - smallshop_auth:
         - write:customer
         - read:customers
+    put:
+      tags:
+        - customer
+      summary: Update an existing customer
+      operationId: updateCustomer
+      parameters:
+        - name: customerId
+          in: path
+          description: Customer id to update
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        description: Customers object that needs to be added to the store
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Customer'
+        required: true
+      responses:
+        400:
+          description: Invalid ID supplied
+          content: { }
+        404:
+          description: Customer not found
+          content: { }
+        405:
+          description: Validation exception
+          content: { }
+      security:
+        - smallshop_auth:
+            - write:customers
+            - read:customers
   /api/v1/customers/{customerId}/uploadImage:
     post:
       tags:

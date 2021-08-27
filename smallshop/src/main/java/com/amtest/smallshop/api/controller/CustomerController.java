@@ -43,8 +43,8 @@ public class CustomerController implements CustomerApi {
     }
 
     @Override
-    public ResponseEntity<Void> deleteCustomerById(UUID id) {
-        service.deleteCustomerById(id);
+    public ResponseEntity<Void> deleteCustomerById(UUID customerId) {
+        service.deleteCustomerById(customerId);
         return accepted().build();
     }
 
@@ -56,11 +56,15 @@ public class CustomerController implements CustomerApi {
     @RequestMapping(value = "/api/v1/customers/{customerId}/uploadImage", method = RequestMethod.POST, consumes = "multipart/form-data")
     @Override
     public ResponseEntity<ModelApiResponse> uploadImage(UUID customerId, @RequestPart("image") MultipartFile multipartFile) {
+        Optional<CustomerEntity> customerOptional = service.getCustomerById(customerId);
+        if (!customerOptional.isPresent())
+            return ResponseEntity.notFound().build();
+        Customer customer = customerOptional.map(assembler::toModel).get();
         String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
         String uploadDir = "user-photos/" + customerId;
-        Optional<CustomerEntity> customer = service.getCustomerById(customerId);
-        customer.get().setPhoto(uploadDir);
-        service.saveCustomer(customer.get());
+
+        customer.setPhoto(uploadDir);
+        service.saveCustomer(customer);
 
         try {
             FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
@@ -70,5 +74,17 @@ public class CustomerController implements CustomerApi {
         return accepted().build();
     }
 
-    //TODO implement other methods
+    @Override
+    public ResponseEntity<Void> updateCustomer(@PathVariable UUID customerId, @RequestBody Customer customer) {
+
+        Optional<CustomerEntity> customerOptional = service.getCustomerById(customerId);
+        if (!customerOptional.isPresent())
+            return ResponseEntity.notFound().build();
+
+        customer.setId(customerId);
+
+        service.saveCustomer(customer);
+
+        return ResponseEntity.noContent().build();
+    }
 }
