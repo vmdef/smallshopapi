@@ -39,9 +39,9 @@ public class CustomerServiceImpl implements CustomerService {
     @Transactional
     public Optional<CustomerEntity> createCustomer(Customer customer) {
         //TODO we need a check to avoid duplicate customers (email)
-        if (Objects.nonNull(repository.findCustomerByName(customer.getName()))) {
+/*        if (Objects.nonNull(repository.findCustomerByName(customer.getName()))) {
             throw new GenericAlreadyExistsException("Use different username and email.");
-        }
+        }*/
         return Optional.of(repository.save(toEntity(customer)));
     }
 

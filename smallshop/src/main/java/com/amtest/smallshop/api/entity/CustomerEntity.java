@@ -26,11 +26,11 @@ public class CustomerEntity {
     private String photo;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "CREATED_BY", updatable = false, nullable = false)
+    @JoinColumn(name = "CREATED_BY", updatable = false/*, nullable = false*/)
     private UserEntity createdBy;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "MODIFIED_BY", nullable = false)
+    @JoinColumn(name = "MODIFIED_BY"/*, nullable = false*/)
     private UserEntity modifiedBy;
 
     public UUID getId() {

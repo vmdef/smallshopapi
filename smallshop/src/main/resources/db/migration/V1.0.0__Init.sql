@@ -17,8 +17,8 @@ create TABLE IF NOT EXISTS smallshop.customer (
     name varchar(16),
     surname varchar(16),
     photo varchar(255),
-    created_by uuid NOT NULL,
-    modified_by uuid NOT NULL,
+    created_by uuid /*NOT NULL*/,
+    modified_by uuid /*NOT NULL*/,
     PRIMARY KEY (id),
     FOREIGN KEY (created_by)
     REFERENCES smallshop.user (id),
