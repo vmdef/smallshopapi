@@ -45,6 +45,12 @@ public class CustomerServiceImpl implements CustomerService {
         return Optional.of(repository.save(toEntity(customer)));
     }
 
+    @Override
+    @Transactional
+    public CustomerEntity saveCustomer(CustomerEntity customer) {
+        return repository.save(customer);
+    }
+
     private CustomerEntity toEntity(Customer customer) {
         CustomerEntity customerEntity = new CustomerEntity();
         BeanUtils.copyProperties(customer, customerEntity);

@@ -81,7 +81,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "{{token\n}}",
+							"value": "{{token}}",
 							"type": "string"
 						}
 					]
@@ -125,6 +125,72 @@
 						"v1",
 						"customers",
 						"618ffaff-cbcd-48d4-8848-a15601e6725b"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/customers/{uuid}/uploadImage",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "If-None-Match",
+						"value": "098e97de3b61db55286f5f2812785116f",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "image",
+							"type": "file",
+							"src": "/Users/vmdef/Pictures/profesor.jpg"
+						}
+					],
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/customers/618ffaff-cbcd-48d4-8848-a15601e6725b/uploadImage",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"customers",
+						"618ffaff-cbcd-48d4-8848-a15601e6725b",
+						"uploadImage"
 					]
 				}
 			},
