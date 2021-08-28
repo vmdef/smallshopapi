@@ -17,17 +17,15 @@ create TABLE IF NOT EXISTS smallshop.customer (
     name varchar(16),
     surname varchar(16),
     photo varchar(255),
-    created_by uuid /*NOT NULL*/,
-    modified_by uuid /*NOT NULL*/,
-    PRIMARY KEY (id),
-    FOREIGN KEY (created_by)
-    REFERENCES smallshop.user (id),
-    FOREIGN KEY (modified_by)
-    REFERENCES smallshop.user (id)
+    created_by varchar(36) default 'admin',
+    last_modified_by varchar(36),
+    creation_date timestamp default current_timestamp ,
+    last_modified_date timestamp default current_timestamp,
+    PRIMARY KEY (id)
 );
 
-insert into smallshop.customer (id, name, surname, photo, created_by, modified_by) values('6d62d909-f957-430e-8689-b5129c0bb75e', 'Customer', 'One', '', 'a1b9b31d-e73c-4112-af7c-b68530f38223', 'a1b9b31d-e73c-4112-af7c-b68530f38223');
-insert into smallshop.customer (id, name, surname, photo, created_by, modified_by) values('618ffaff-cbcd-48d4-8848-a15601e6725b', 'Customer', 'Two', '', 'a1b9b31d-e73c-4112-af7c-b68530f38223', 'a1b9b31d-e73c-4112-af7c-b68530f38223');
+insert into smallshop.customer (id, name, surname, photo, created_by, last_modified_by) values('6d62d909-f957-430e-8689-b5129c0bb75e', 'Customer', 'One', '', 'admin', 'admin');
+insert into smallshop.customer (id, name, surname, photo, created_by, last_modified_by) values('618ffaff-cbcd-48d4-8848-a15601e6725b', 'Customer', 'Two', '', 'admin', 'admin');
 
 create TABLE IF NOT EXISTS smallshop.user_token (
     id uuid NOT NULL DEFAULT random_uuid(),

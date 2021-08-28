@@ -13,4 +13,5 @@ public class Constants {
     public static final long EXPIRATION_TIME = 900_000; // 15 mins
     public static final String ROLE_CLAIM = "roles";
     public static final String AUTHORITY_PREFIX = "ROLE_";
+    public static final String SYSTEM_ADMIN = "admin";
 }

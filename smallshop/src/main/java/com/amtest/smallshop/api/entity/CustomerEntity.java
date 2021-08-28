@@ -1,12 +1,20 @@
 package com.amtest.smallshop.api.entity;
 
+import com.amtest.smallshop.api.security.Auditable;
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
+import java.sql.Timestamp;
 import java.util.UUID;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "customer")
-public class CustomerEntity {
+public class CustomerEntity extends Auditable<String> {
     @Id
     @GeneratedValue
     @Column(name = "ID", updatable = false, nullable = false)
@@ -25,13 +33,21 @@ public class CustomerEntity {
     @Column(name = "PHOTO")
     private String photo;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "CREATED_BY", updatable = false/*, nullable = false*/)
-    private UserEntity createdBy;
+/*    @Column(name = "created_date", nullable = false, updatable = false)
+    @CreatedDate
+    private Timestamp createdDate;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "MODIFIED_BY"/*, nullable = false*/)
-    private UserEntity modifiedBy;
+    @Column(name = "modified_date")
+    @LastModifiedDate
+    private Timestamp modifiedDate;
+
+    @Column(name = "created_by")
+    @CreatedBy
+    private String createdBy;
+
+    @Column(name = "modified_by")
+    @LastModifiedBy
+    private String modifiedBy;*/
 
     public UUID getId() {
         return id;
@@ -70,22 +86,6 @@ public class CustomerEntity {
         return this;
     }
 
-    public UserEntity getCreatedBy() {
-        return createdBy;
-    }
-
-    public void setCreatedBy(UserEntity createdBy) {
-        this.createdBy = createdBy;
-    }
-
-    public UserEntity getModifiedBy() {
-        return modifiedBy;
-    }
-
-    public void setModifiedBy(UserEntity modifiedBy) {
-        this.modifiedBy = modifiedBy;
-    }
-
     @Override
     public String toString() {
         return "UserEntity{" +
@@ -93,8 +93,6 @@ public class CustomerEntity {
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
                 ", phone='" + photo + '\'' +
-                ", createdBy='" + createdBy + '\'' +
-                ", modifiedBy='" + modifiedBy + '\'' +
                 '}';
     }
 

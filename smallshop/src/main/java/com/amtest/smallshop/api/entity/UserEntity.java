@@ -1,21 +1,13 @@
 package com.amtest.smallshop.api.entity;
 
-import java.util.Collections;
-import java.util.List;
 import java.util.UUID;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -41,12 +33,6 @@ public class UserEntity {
     @Column(name = "ROLE")
     @Enumerated(EnumType.STRING)
     private RoleEnum role = RoleEnum.USER;
-
-    @OneToMany(mappedBy = "createdBy", fetch = FetchType.LAZY)
-    private List<CustomerEntity> createdUsers;
-
-    @OneToMany(mappedBy = "modifiedBy", fetch = FetchType.LAZY)
-    private List<CustomerEntity> modifiedUsers;
 
     public UUID getId() {
         return id;
@@ -91,22 +77,6 @@ public class UserEntity {
     public UserEntity setRole(RoleEnum role) {
         this.role = role;
         return this;
-    }
-
-    public List<CustomerEntity> getCreatedUsers() {
-        return createdUsers;
-    }
-
-    public void setCreatedUsers(List<CustomerEntity> createdUsers) {
-        this.createdUsers = createdUsers;
-    }
-
-    public List<CustomerEntity> getModifiedUsers() {
-        return modifiedUsers;
-    }
-
-    public void setModifiedUsers(List<CustomerEntity> modifiedUsers) {
-        this.modifiedUsers = modifiedUsers;
     }
 
     @Override
