@@ -1,16 +1,11 @@
 package com.amtest.smallshop.api.controller;
 
-import static org.springframework.http.ResponseEntity.accepted;
-import static org.springframework.http.ResponseEntity.ok;
-import static org.springframework.http.ResponseEntity.status;
-
 import com.amtest.smallshop.api.UserApi;
 import com.amtest.smallshop.api.entity.UserEntity;
 import com.amtest.smallshop.api.exception.InvalidRefreshTokenException;
-import com.amtest.smallshop.api.model.RefreshToken;
-import com.amtest.smallshop.api.model.SignInReq;
-import com.amtest.smallshop.api.model.SignedInUser;
-import com.amtest.smallshop.api.model.User;
+import com.amtest.smallshop.api.hateoas.CustomerRepresentationModelAssembler;
+import com.amtest.smallshop.api.hateoas.UserRepresentationModelAssembler;
+import com.amtest.smallshop.api.model.*;
 import com.amtest.smallshop.api.service.UserService;
 import javax.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -19,15 +14,22 @@ import org.springframework.security.authentication.InsufficientAuthenticationExc
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+import java.util.UUID;
+
+import static org.springframework.http.ResponseEntity.*;
+
 @RestController
 public class AuthController implements UserApi {
 
   private final UserService service;
   private final PasswordEncoder passwordEncoder;
+  private final UserRepresentationModelAssembler assembler;
 
-  public AuthController(UserService service, PasswordEncoder passwordEncoder) {
+  public AuthController(UserService service, PasswordEncoder passwordEncoder, UserRepresentationModelAssembler assembler) {
     this.service = service;
     this.passwordEncoder = passwordEncoder;
+    this.assembler = assembler;
   }
 
   @Override
@@ -58,4 +60,15 @@ public class AuthController implements UserApi {
     // Have a validation for all required fields.
     return status(HttpStatus.CREATED).body(service.createUser(user).get());
   }
+
+  @Override
+  public ResponseEntity<List<User>> getUsers() {
+    return ok(assembler.toListModel(service.getUsers()));
+  }
+
+  @Override
+  public ResponseEntity<User> getUserById(UUID userId) {
+    return service.getUserById(userId).map(assembler::toModel).map(ResponseEntity::ok).orElse(notFound().build());
+  }
+
 }

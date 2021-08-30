@@ -42,10 +42,6 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Customer'
-      security:
-      - smallshop_auth:
-        - write:customers
-        - read:customers
     post:
       tags:
       - customer
@@ -177,6 +173,21 @@ paths:
               schema:
                 $ref: '#/components/schemas/ModelApiResponse'
   /api/v1/users:
+    get:
+      tags:
+        - user
+      summary: Returns the small shop users
+      description: Returns all the small shop users
+      operationId: getUsers
+      responses:
+        200:
+          description: Small shop users
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
     post:
       tags:
         - user
@@ -249,19 +260,20 @@ paths:
       - smallshop_auth:
         - write:customers
         - read:customers
-  /api/v1/users/{username}:
+  /api/v1/users/{userId}:
     get:
       tags:
       - user
       summary: Get user by user name
-      operationId: getUserByName
+      operationId: getUserById
       parameters:
-      - name: username
+      - name: userId
         in: path
-        description: 'The name that needs to be fetched. Use user1 for testing. '
+        description: 'The id of the user that needs to be fetched.'
         required: true
         schema:
           type: string
+          format: uuid
       responses:
         200:
           description: successful operation
@@ -282,12 +294,13 @@ paths:
       description: This can only be done by the logged in user.
       operationId: updateUser
       parameters:
-      - name: username
-        in: path
-        description: name that need to be updated
-        required: true
-        schema:
-          type: string
+        - name: userId
+          in: path
+          description: 'The id of the user that needs to be fetched.'
+          required: true
+          schema:
+            type: string
+            format: uuid
       requestBody:
         description: Updated user object
         content:
@@ -309,12 +322,13 @@ paths:
       description: This can only be done by the logged in user.
       operationId: deleteUser
       parameters:
-      - name: username
-        in: path
-        description: The name that needs to be deleted
-        required: true
-        schema:
-          type: string
+        - name: userId
+          in: path
+          description: 'The id of the user that needs to be fetched.'
+          required: true
+          schema:
+            type: string
+            format: uuid
       responses:
         400:
           description: Invalid username supplied

@@ -1,9 +1,12 @@
 package com.amtest.smallshop.api.service;
 
+import com.amtest.smallshop.api.entity.CustomerEntity;
 import com.amtest.smallshop.api.entity.UserEntity;
 import com.amtest.smallshop.api.entity.UserTokenEntity;
+import com.amtest.smallshop.api.exception.CustomerNotFoundException;
 import com.amtest.smallshop.api.exception.GenericAlreadyExistsException;
 import com.amtest.smallshop.api.exception.InvalidRefreshTokenException;
+import com.amtest.smallshop.api.exception.UserNotFoundException;
 import com.amtest.smallshop.api.model.RefreshToken;
 import com.amtest.smallshop.api.model.SignedInUser;
 import com.amtest.smallshop.api.model.User;
@@ -121,5 +124,19 @@ public class UserServiceImpl implements UserService {
             return String.format("%"+length+"s", new BigInteger(length*5/*base 32,2^5*/, random)
                     .toString(32)).replace('\u0020', '0');
         }
+    }
+
+    @Override
+    public Iterable<UserEntity> getUsers() {
+        return repository.findAll();
+    }
+
+    @Override
+    public Optional<UserEntity> getUserById(UUID userId) {
+        Optional<UserEntity> user = repository.getUserById(userId);
+        if (!user.isPresent()) {
+            throw new UserNotFoundException("UUID: " + userId);
+        }
+        return user;
     }
 }

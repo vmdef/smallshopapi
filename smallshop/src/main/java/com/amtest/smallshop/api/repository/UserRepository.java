@@ -1,5 +1,6 @@
 package com.amtest.smallshop.api.repository;
 
+import com.amtest.smallshop.api.entity.CustomerEntity;
 import com.amtest.smallshop.api.entity.UserEntity;
 import java.util.Optional;
 import java.util.UUID;
@@ -7,6 +8,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
 public interface UserRepository extends CrudRepository<UserEntity, UUID> {
+
+    Optional<UserEntity> getUserById(UUID userId);
 
     Optional<UserEntity> findByUsername(String username);
 

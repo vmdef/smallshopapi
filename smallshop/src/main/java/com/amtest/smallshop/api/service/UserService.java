@@ -1,12 +1,18 @@
 package com.amtest.smallshop.api.service;
 
+import com.amtest.smallshop.api.entity.CustomerEntity;
 import com.amtest.smallshop.api.entity.UserEntity;
 import com.amtest.smallshop.api.model.RefreshToken;
 import com.amtest.smallshop.api.model.SignedInUser;
 import com.amtest.smallshop.api.model.User;
 import java.util.Optional;
+import java.util.UUID;
 
 public interface UserService {
+
+    public Iterable<UserEntity> getUsers();
+
+    public Optional<UserEntity> getUserById(UUID userId);
 
     Optional<SignedInUser> createUser(User user);
 
