@@ -68,10 +68,6 @@ paths:
         405:
           description: Invalid input
           content: {}
-      security:
-      - smallshop_auth:
-        - write:customers
-        - read:customers
   /api/v1/customers/{customerId}:
     get:
       tags:
@@ -100,10 +96,6 @@ paths:
         404:
           description: Customer not found
           content: {}
-      security:
-      - smallshop_auth:
-        - write:customer
-        - read:customers
     delete:
       tags:
       - customer
@@ -124,10 +116,6 @@ paths:
         404:
           description: Customer not found
           content: {}
-      security:
-      - smallshop_auth:
-        - write:customer
-        - read:customers
     put:
       tags:
         - customer
@@ -158,10 +146,6 @@ paths:
         405:
           description: Validation exception
           content: { }
-      security:
-        - smallshop_auth:
-            - write:customers
-            - read:customers
   /api/v1/customers/{customerId}/uploadImage:
     post:
       tags:
@@ -192,10 +176,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ModelApiResponse'
-      security:
-      - smallshop_auth:
-        - write:customers
-        - read:customers
   /api/v1/users:
     post:
       tags:
@@ -215,10 +195,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/SignedInUser'
-      security:
-      - smallshop_auth:
-        - write:customers
-        - read:customers      
   /api/v1/users/login:
     get:
       tags:
@@ -259,10 +235,6 @@ paths:
         400:
           description: Invalid username/password supplied
           content: {}
-      security:
-      - smallshop_auth:
-        - write:customers
-        - read:customers
   /api/v1/users/logout:
     get:
       tags:
@@ -303,10 +275,6 @@ paths:
         404:
           description: User not found
           content: {}
-      security:
-      - smallshop_auth:
-        - write:customers
-        - read:customers
     put:
       tags:
       - user
@@ -334,10 +302,6 @@ paths:
         404:
           description: User not found
           content: {}
-      security:
-      - smallshop_auth:
-        - write:customers
-        - read:customers
     delete:
       tags:
       - user
@@ -358,10 +322,6 @@ paths:
         404:
           description: User not found
           content: {}
-      security:
-      - smallshop_auth:
-        - write:customers
-        - read:customers
   /api/v1/auth/token:
     post:
       tags:

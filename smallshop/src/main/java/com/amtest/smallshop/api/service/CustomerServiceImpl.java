@@ -56,7 +56,7 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     @Transactional
     public CustomerEntity saveCustomer(Customer customer) {
-
+        // TODO Update only modified fields
         return repository.save(toEntity(customer));
     }
 
