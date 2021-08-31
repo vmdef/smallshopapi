@@ -80,7 +80,7 @@ public class CustomerController implements CustomerApi {
         Optional<CustomerEntity> customerOptional = service.getCustomerById(customerId);
         if (!customerOptional.isPresent())
             return ResponseEntity.notFound().build();
-
+        // TODO Keep existing field values not modified.
         customer.setId(customerId);
 
         service.saveCustomer(customer);

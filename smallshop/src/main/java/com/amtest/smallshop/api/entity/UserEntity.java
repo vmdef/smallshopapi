@@ -28,7 +28,7 @@ public class UserEntity {
     private String password;
 
     @Column(name = "ADMIN_STATUS")
-    private String adminStatus = "ACTIVE";
+    private boolean adminStatus = false;
 
     @Column(name = "ROLE")
     @Enumerated(EnumType.STRING)
@@ -61,11 +61,11 @@ public class UserEntity {
         return this;
     }
 
-    public String getAdminStatus() {
+    public Boolean getAdminStatus() {
         return adminStatus;
     }
 
-    public UserEntity setAdminStatus(String adminStatus) {
+    public UserEntity setAdminStatus(Boolean adminStatus) {
         this.adminStatus = adminStatus;
         return this;
     }

@@ -558,7 +558,7 @@
 					"response": []
 				},
 				{
-					"name": "/customers - Update user",
+					"name": "/customers - Update customer",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -906,6 +906,63 @@
 								"api",
 								"v1",
 								"customers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/user - Update user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "If-None-Match",
+								"value": "098e97de3b61db55286f5f2812785116f",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Name\",\r\n    \"surname\": \"Updated\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/customers/618ffaff-cbcd-48d4-8848-a15601e6725b",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"customers",
+								"618ffaff-cbcd-48d4-8848-a15601e6725b"
 							]
 						}
 					},

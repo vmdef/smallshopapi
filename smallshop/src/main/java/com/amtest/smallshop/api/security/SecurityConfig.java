@@ -97,7 +97,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers(HttpMethod.POST, TOKEN_URL).permitAll()
                 .antMatchers(HttpMethod.DELETE, TOKEN_URL).permitAll()
-                .antMatchers(HttpMethod.POST, SIGNUP_URL).permitAll()
+                // .antMatchers(HttpMethod.POST, SIGNUP_URL).permitAll()
                 .antMatchers(HttpMethod.POST, REFRESH_URL).permitAll()
                 .antMatchers(H2_URL_PREFIX).permitAll()
                 .antMatchers("/api/v1/users/**")

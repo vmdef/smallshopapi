@@ -296,7 +296,7 @@ paths:
       parameters:
         - name: userId
           in: path
-          description: 'The id of the user that needs to be fetched.'
+          description: 'The id of the user to update.'
           required: true
           schema:
             type: string
@@ -304,7 +304,7 @@ paths:
       requestBody:
         description: Updated user object
         content:
-          '*/*':
+          'application/json':
             schema:
               $ref: '#/components/schemas/User'
         required: true

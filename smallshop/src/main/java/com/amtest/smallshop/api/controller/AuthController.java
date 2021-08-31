@@ -1,6 +1,7 @@
 package com.amtest.smallshop.api.controller;
 
 import com.amtest.smallshop.api.UserApi;
+import com.amtest.smallshop.api.entity.CustomerEntity;
 import com.amtest.smallshop.api.entity.UserEntity;
 import com.amtest.smallshop.api.exception.InvalidRefreshTokenException;
 import com.amtest.smallshop.api.hateoas.CustomerRepresentationModelAssembler;
@@ -12,9 +13,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.InsufficientAuthenticationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 import static org.springframework.http.ResponseEntity.*;
@@ -77,6 +81,29 @@ public class AuthController implements UserApi {
     // TODO instead of delete the user, mark as inactive
     service.deleteUserById(userId);
     return accepted().build();
+  }
+
+  @Override
+  public ResponseEntity<Void> updateUser(@PathVariable UUID userId, @RequestBody User user) {
+
+    Optional<UserEntity> userOptional = service.getUserById(userId);
+    if (!userOptional.isPresent())
+      return ResponseEntity.notFound().build();
+    // TODO Keep existing field values not modified (PATCH)
+    user.setId(userId);
+    if (user.getPassword() == null) {
+      user.setPassword(userOptional.get().getPassword());
+    }
+    if (user.getUsername() == null) {
+      user.setUsername(userOptional.get().getUsername());
+    }
+    if (user.getAdminStatus() == null) {
+      user.setAdminStatus(userOptional.get().getAdminStatus());
+    }
+
+    service.saveUser(user);
+
+    return ResponseEntity.noContent().build();
   }
 
 }

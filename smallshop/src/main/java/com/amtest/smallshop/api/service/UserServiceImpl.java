@@ -1,12 +1,14 @@
 package com.amtest.smallshop.api.service;
 
 import com.amtest.smallshop.api.entity.CustomerEntity;
+import com.amtest.smallshop.api.entity.RoleEnum;
 import com.amtest.smallshop.api.entity.UserEntity;
 import com.amtest.smallshop.api.entity.UserTokenEntity;
 import com.amtest.smallshop.api.exception.CustomerNotFoundException;
 import com.amtest.smallshop.api.exception.GenericAlreadyExistsException;
 import com.amtest.smallshop.api.exception.InvalidRefreshTokenException;
 import com.amtest.smallshop.api.exception.UserNotFoundException;
+import com.amtest.smallshop.api.model.Customer;
 import com.amtest.smallshop.api.model.RefreshToken;
 import com.amtest.smallshop.api.model.SignedInUser;
 import com.amtest.smallshop.api.model.User;
@@ -106,7 +108,13 @@ public class UserServiceImpl implements UserService {
     private UserEntity toEntity(User user) {
         UserEntity userEntity = new UserEntity();
         BeanUtils.copyProperties(user, userEntity);
+        // TODO check if the password is already encrypted
         userEntity.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        if (user.getAdminStatus() == true) {
+            userEntity.setRole(RoleEnum.ADMIN);
+        } else {
+            userEntity.setRole(RoleEnum.USER);
+        }
         return userEntity;
     }
 
@@ -143,5 +151,12 @@ public class UserServiceImpl implements UserService {
     @Override
     public void deleteUserById(UUID userId) {
         repository.deleteById(userId);
+    }
+
+    @Override
+    @Transactional
+    public UserEntity saveUser(User user) {
+        // TODO Update only modified fields (PATCH)
+        return repository.save(toEntity(user));
     }
 }

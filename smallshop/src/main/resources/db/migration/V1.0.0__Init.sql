@@ -4,13 +4,13 @@ create TABLE IF NOT EXISTS smallshop.user (
     id uuid NOT NULL DEFAULT random_uuid(),
     username varchar(16),
     password varchar(72),
-    admin_status varchar(16) NOT NULL DEFAULT 'ACTIVE' NULL_TO_DEFAULT,
+    admin_status boolean NOT NULL DEFAULT false NULL_TO_DEFAULT,
     role varchar(16) NOT NULL DEFAULT 'ROLE_USER' NULL_TO_DEFAULT,
     PRIMARY KEY(id)
     );
 
-insert into smallshop.user (id, username, password, admin_status, role) values('a1b9b31d-e73c-4112-af7c-b68530f38222', 'admin', '{bcrypt}$2a$10$neR0EcYY5./tLVp4litNyuBy/kfrTsqEv8hiyqEKX0TXIQQwC/5Rm', 'ACTIVE', 'ADMIN');
-insert into smallshop.user (id, username, password, admin_status, role) values('a1b9b31d-e73c-4112-af7c-b68530f38223', 'noadmin', '{bcrypt}$2a$10$neR0EcYY5./tLVp4litNyuBy/kfrTsqEv8hiyqEKX0TXIQQwC/5Rm', 'ACTIVE', 'USER');
+insert into smallshop.user (id, username, password, admin_status, role) values('a1b9b31d-e73c-4112-af7c-b68530f38222', 'admin', '{bcrypt}$2a$10$neR0EcYY5./tLVp4litNyuBy/kfrTsqEv8hiyqEKX0TXIQQwC/5Rm', true, 'ADMIN');
+insert into smallshop.user (id, username, password, admin_status, role) values('a1b9b31d-e73c-4112-af7c-b68530f38223', 'noadmin', '{bcrypt}$2a$10$neR0EcYY5./tLVp4litNyuBy/kfrTsqEv8hiyqEKX0TXIQQwC/5Rm', false, 'USER');
 
 create TABLE IF NOT EXISTS smallshop.customer (
     id uuid NOT NULL DEFAULT random_uuid(),
