@@ -320,11 +320,11 @@ paths:
       - user
       summary: Delete user
       description: This can only be done by the logged in user.
-      operationId: deleteUser
+      operationId: deleteUserById
       parameters:
         - name: userId
           in: path
-          description: 'The id of the user that needs to be fetched.'
+          description: 'The id of the user to be deleted.'
           required: true
           schema:
             type: string

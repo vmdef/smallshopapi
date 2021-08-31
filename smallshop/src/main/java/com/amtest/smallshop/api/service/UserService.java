@@ -14,6 +14,8 @@ public interface UserService {
 
     public Optional<UserEntity> getUserById(UUID userId);
 
+    void deleteUserById(UUID customerId);
+
     Optional<SignedInUser> createUser(User user);
 
     UserEntity findUserByUsername(String username);

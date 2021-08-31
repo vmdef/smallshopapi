@@ -57,7 +57,8 @@ public class AuthController implements UserApi {
 
   @Override
   public ResponseEntity<SignedInUser> signUp(@Valid User user) {
-    // Have a validation for all required fields.
+    // TODO Should we return access_token
+    // TODO Add input fields validation
     return status(HttpStatus.CREATED).body(service.createUser(user).get());
   }
 
@@ -69,6 +70,13 @@ public class AuthController implements UserApi {
   @Override
   public ResponseEntity<User> getUserById(UUID userId) {
     return service.getUserById(userId).map(assembler::toModel).map(ResponseEntity::ok).orElse(notFound().build());
+  }
+
+  @Override
+  public ResponseEntity<Void> deleteUserById(UUID userId) {
+    // TODO instead of delete the user, mark as inactive
+    service.deleteUserById(userId);
+    return accepted().build();
   }
 
 }
