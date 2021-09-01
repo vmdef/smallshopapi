@@ -1,5 +1,7 @@
 # Small Shop API
 Small Shop API is a REST API to manage customer data for a small shop. It will  work  as  the  backend  side  for  a  CRM  interface.
+## Disclaimer
+This is still a Work In Progress. Do not assume that the chosen approaches and their implementation are correct. This project is a first contact with Java, Spring and Spring Boot, so mistakes are around and there is room for improvement.
 ## Features
 - The API is only accessible by a registered user.
 - A user can (basic CRUD):
@@ -14,3 +16,35 @@ The API specification is written using version 3.0.3 of OAS (https://github.com/
 To check the documentation:
 1. Clone this project.
 2. In a web browser, load **docs/api/index.html**.
+## Run Locally
+Clone the project
+```bash
+  git clone https://github.com/vmdef/smallshopapi.git
+```
+Go to the project directory
+```bash
+  cd smallshopapi/smallshop
+```
+Built the app
+
+```bash
+  ./gradlew clean build  
+```
+
+Start the server
+
+```bash
+  java -jar build/libs/smallshop-0.0.1-SNAPSHOT.jar 
+```
+
+## Testing the application
+Automated tests have not been fully implemented yet:(
+### Postman
+Import the collection *postmanCollection/SmallShopAPI.postman_collection.json*.
+There are 3 folders:
+- Authentication: to authenticate as an admin or regular user.
+- Customers: customers related tests (you have to authenticate before).
+- Users: users related tests (you have to authenticate as admin user before).
+
+## Database
+The app uses an in-memory H2 database. you can launch H2 console at http://localhost:8080/h2-console. Change the default JDBC URL to *jdbc:h2:mem:smallshop*
