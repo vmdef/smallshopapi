@@ -26,11 +26,7 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public Optional<CustomerEntity> getCustomerById(UUID customerId) {
-        Optional<CustomerEntity> customer = repository.getCustomerById(customerId);
-        if (!customer.isPresent()) {
-            throw new CustomerNotFoundException("UUID: " + customerId);
-        }
-        return customer;
+        return repository.findById(customerId);
     }
 
     @Override
@@ -40,7 +36,13 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public void deleteCustomerById(UUID customerId) {
-        repository.deleteById(customerId);
+        Optional<CustomerEntity> customer = repository.findById(customerId);
+        if (customer.isPresent()) {
+            repository.deleteById(customerId);
+        } else {
+            throw new CustomerNotFoundException(String
+                    .format("Customer with id %s doesn't exist", customerId.toString()));
+        }
     }
 
     @Override

@@ -141,11 +141,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Optional<UserEntity> getUserById(UUID userId) {
-        Optional<UserEntity> user = repository.getUserById(userId);
-        if (!user.isPresent()) {
+        return repository.findById(userId);
+/*         Optional<UserEntity> user = repository.getUserById(userId);
+       if (!user.isPresent()) {
             throw new UserNotFoundException("UUID: " + userId);
         }
-        return user;
+        return user;*/
     }
 
     @Override

@@ -45,7 +45,7 @@ public class CustomerController implements CustomerApi {
     @Override
     public ResponseEntity<Void> deleteCustomerById(UUID customerId) {
         service.deleteCustomerById(customerId);
-        return accepted().build();
+        return noContent().build();
     }
 
     @Override
