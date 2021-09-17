@@ -20,7 +20,8 @@ public enum ErrorCode {
     ITEM_NOT_FOUND("ERR-0012", "Requested item not found."),
     GENERIC_ALREADY_EXISTS("ERR-0013", "Already exists."),
     ACCESS_DENIED("ERR-0014", "Access Denied."),
-    UNAUTHORIZED("ERR-0015", "Unauthorized");
+    UNAUTHORIZED("ERR-0015", "Unauthorized"),
+    METHOD_ARGUMENT_TYPE_MISTMATCH("ERR-0016", "Wrong argument type");
 
     private String errCode;
     private String errMsgKey;
