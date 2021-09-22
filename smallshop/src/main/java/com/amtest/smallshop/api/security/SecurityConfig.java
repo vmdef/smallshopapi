@@ -1,13 +1,5 @@
 package com.amtest.smallshop.api.security;
 
-import static com.amtest.smallshop.api.security.Constants.API_URL_PREFIX;
-import static com.amtest.smallshop.api.security.Constants.AUTHORITY_PREFIX;
-import static com.amtest.smallshop.api.security.Constants.H2_URL_PREFIX;
-import static com.amtest.smallshop.api.security.Constants.REFRESH_URL;
-import static com.amtest.smallshop.api.security.Constants.ROLE_CLAIM;
-import static com.amtest.smallshop.api.security.Constants.SIGNUP_URL;
-import static com.amtest.smallshop.api.security.Constants.TOKEN_URL;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.amtest.smallshop.api.entity.RoleEnum;
 import com.amtest.smallshop.api.security.UNUSED.ApiAccessDeniedHandler;
@@ -51,6 +43,8 @@ import org.springframework.security.oauth2.server.resource.authentication.JwtGra
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
+import static com.amtest.smallshop.api.security.Constants.*;
 
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
@@ -100,7 +94,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 // .antMatchers(HttpMethod.POST, SIGNUP_URL).permitAll()
                 .antMatchers(HttpMethod.POST, REFRESH_URL).permitAll()
                 .antMatchers(H2_URL_PREFIX).permitAll()
-                .antMatchers("/api/v1/users/**")
+                .mvcMatchers("/api/v1/users/**")
                 .hasAuthority(RoleEnum.ADMIN.getAuthority())
                 .anyRequest().authenticated()
                 .and()

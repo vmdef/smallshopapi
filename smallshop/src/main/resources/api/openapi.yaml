@@ -44,7 +44,7 @@ paths:
                   $ref: '#/components/schemas/Customer'
     post:
       tags:
-      - customer
+        - customer
       summary: Add a new shop customer
       operationId: createCustomer
       requestBody:
@@ -53,7 +53,6 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/Customer'
-        required: true
       responses:
         200:
           description: Succesful creation.
@@ -393,7 +392,6 @@ components:
     Customer:
       description: A Small Shop customer
       required:
-        - id
         - name
         - surname
       type: object
@@ -403,8 +401,12 @@ components:
           format: uuid
         name:
           type: string
+          minLength: 4
+          maxLength: 16
         surname:
           type: string
+          minLength: 4
+          maxLength: 75
         photo:
           type: string
     User:

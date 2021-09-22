@@ -20,6 +20,7 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.HttpMediaTypeNotAcceptableException;
 import org.springframework.web.HttpMediaTypeNotSupportedException;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
@@ -149,7 +150,7 @@ public class RestApiErrorHandler {
     }
 
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
-    public ResponseEntity<Error> MethodArgumentTypeMismatchException(
+    public ResponseEntity<Error> handleMethodArgumentTypeMismatchException(
             HttpServletRequest request,
             MethodArgumentTypeMismatchException ex,
             Locale locale) {
@@ -157,6 +158,18 @@ public class RestApiErrorHandler {
                 .createError(String
                                 .format("'%s' should be a valid '%s' and '%s' isn't", ex.getName(), ex.getRequiredType().getSimpleName(), ex.getValue()),
                         ErrorCode.METHOD_ARGUMENT_TYPE_MISTMATCH.getErrCode(),
+                        HttpStatus.BAD_REQUEST.value()).setUrl(request.getRequestURL().toString())
+                .setReqMethod(request.getMethod())
+                .setTimestamp(Instant.now());
+        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<Object> handleMethodArgumentNotValidException(HttpServletRequest request, MethodArgumentNotValidException ex,
+                                                                  Locale locale) {
+        Error error = ErrorUtils
+                .createError(String.format("Argument Validation Failed: %s", ex.getBindingResult().toString()),
+                        ErrorCode.ILLEGAL_ARGUMENT_EXCEPTION.getErrCode(),
                         HttpStatus.BAD_REQUEST.value()).setUrl(request.getRequestURL().toString())
                 .setReqMethod(request.getMethod())
                 .setTimestamp(Instant.now());

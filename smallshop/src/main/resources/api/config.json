@@ -9,7 +9,7 @@
   "useTags": true,
   "useGzipFeature" : true,
   "hateoas": true,
-  "withXml": true,
+  "withXml": false,
   "importMappings": {
     "ResourceSupport":"org.springframework.hateoas.RepresentationModel",
     "Link": "org.springframework.hateoas.Link"

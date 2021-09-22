@@ -1,6 +1,6 @@
 plugins {
-    id 'org.springframework.boot' version '2.5.3'
-    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'org.springframework.boot' version '2.5.4'
+    id 'io.spring.dependency-management' version '1.0.10.RELEASE'
     id 'java'
     id 'org.hidetake.swagger.generator' version '2.18.2'
     id 'jacoco'
@@ -8,7 +8,7 @@ plugins {
 
 group = 'com.amtest.smallshop.api'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '16'
+sourceCompatibility = JavaVersion.VERSION_11
 
 swaggerSources {
     def typeMappings = 'URI=URI, BigDecimal=BigDecimal, EntityModel=EntityModel'
@@ -71,7 +71,7 @@ dependencies {
     // OpenAPI Starts
     swaggerCodegen 'org.openapitools:openapi-generator-cli:5.0.0'
     compileOnly 'io.swagger:swagger-annotations:1.6.2'
-    compileOnly 'org.springframework.boot:spring-boot-starter-validation'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
     compileOnly 'org.openapitools:jackson-databind-nullable:0.2.1'
     implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml'
     implementation 'org.springframework.boot:spring-boot-starter-hateoas'
@@ -92,7 +92,7 @@ dependencies {
 
     implementation 'org.springframework.boot:spring-boot-starter-web'
 
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation('org.springframework.boot:spring-boot-starter-test')
 }
 
 test {
