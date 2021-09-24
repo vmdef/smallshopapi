@@ -17,6 +17,7 @@ To check the documentation:
 1. Clone this project.
 2. In a web browser, load **docs/api/index.html**.
 ## Run Locally
+### Manually
 Clone the project
 ```bash
   git clone https://github.com/vmdef/smallshopapi.git
@@ -36,7 +37,16 @@ Start the server
 ```bash
   java -jar build/libs/smallshop-0.0.1-SNAPSHOT.jar 
 ```
+### Using docker
+Build an image with the following command
+```bash
+docker build -t myorg/smallshop .
+```
 
+Then we can run it by running the following command:
+```bash
+docker run -p 8080:8080 myorg/smallshop
+```
 ## Testing the application
 Automated tests have not been fully implemented yet:(
 ### Postman
@@ -47,4 +57,4 @@ There are 3 folders:
 - Users: users related tests (you have to authenticate as admin user before).
 
 ## Database
-The app uses an in-memory H2 database. you can launch H2 console at http://localhost:8080/h2-console. Change the default JDBC URL to *jdbc:h2:mem:smallshop*
+The app uses an in-memory H2 database. You can launch H2 console at http://localhost:8080/h2-console. Change the default JDBC URL to *jdbc:h2:mem:smallshop*
