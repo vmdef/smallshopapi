@@ -68,8 +68,8 @@ public class CustomerControllerTest {
 
     @Test
     @DisplayName("returns customer by given id")
-    public void getCustomerById() throws Exception {
-        given(service.getCustomerById(UUID.fromString(id)))
+    public void getCustomer() throws Exception {
+        given(service.getCustomer(UUID.fromString(id)))
                 .willReturn(Optional.of(entity));
 
         // when

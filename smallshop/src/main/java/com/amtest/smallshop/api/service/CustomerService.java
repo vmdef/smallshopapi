@@ -7,9 +7,9 @@ import java.util.Optional;
 import java.util.UUID;
 
 public interface CustomerService {
-    public Optional<CustomerEntity> getCustomerById(UUID customerId);
+    public Optional<CustomerEntity> getCustomer(UUID customerId);
     public Iterable<CustomerEntity> getCustomers();
-    void deleteCustomerById(UUID customerId);
+    void deleteCustomer(UUID customerId);
     Optional<CustomerEntity> createCustomer(Customer customer);
     public CustomerEntity saveCustomer(Customer customer);
 }

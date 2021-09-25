@@ -72,21 +72,21 @@ public class AuthController implements UserApi {
   }
 
   @Override
-  public ResponseEntity<User> getUserById(UUID userId) {
-    return service.getUserById(userId).map(assembler::toModel).map(ResponseEntity::ok).orElse(notFound().build());
+  public ResponseEntity<User> getUser(UUID userId) {
+    return service.getUser(userId).map(assembler::toModel).map(ResponseEntity::ok).orElse(notFound().build());
   }
 
   @Override
-  public ResponseEntity<Void> deleteUserById(UUID userId) {
+  public ResponseEntity<Void> deleteUser(UUID userId) {
     // TODO instead of delete the user, mark as inactive
-    service.deleteUserById(userId);
+    service.deleteUser(userId);
     return accepted().build();
   }
 
   @Override
   public ResponseEntity<Void> updateUser(@PathVariable UUID userId, @RequestBody User user) {
 
-    Optional<UserEntity> userOptional = service.getUserById(userId);
+    Optional<UserEntity> userOptional = service.getUser(userId);
     if (!userOptional.isPresent())
       return ResponseEntity.notFound().build();
     // TODO Keep existing field values not modified (PATCH)

@@ -34,8 +34,8 @@ public class CustomerController implements CustomerApi {
     }
 
     @Override
-    public ResponseEntity<Customer> getCustomerById(UUID customerId) {
-        return service.getCustomerById(customerId).map(assembler::toModel).map(ResponseEntity::ok).orElse(notFound().build());
+    public ResponseEntity<Customer> getCustomer(UUID customerId) {
+        return service.getCustomer(customerId).map(assembler::toModel).map(ResponseEntity::ok).orElse(notFound().build());
     }
 
     @Override
@@ -44,8 +44,8 @@ public class CustomerController implements CustomerApi {
     }
 
     @Override
-    public ResponseEntity<Void> deleteCustomerById(UUID customerId) {
-        service.deleteCustomerById(customerId);
+    public ResponseEntity<Void> deleteCustomer(UUID customerId) {
+        service.deleteCustomer(customerId);
         return noContent().build();
     }
 
@@ -57,7 +57,7 @@ public class CustomerController implements CustomerApi {
     @RequestMapping(value = "/api/v1/customers/{customerId}/uploadImage", method = RequestMethod.POST, consumes = "multipart/form-data")
     @Override
     public ResponseEntity<ModelApiResponse> uploadImage(UUID customerId, @RequestPart("image") MultipartFile multipartFile) {
-        Optional<CustomerEntity> customerOptional = service.getCustomerById(customerId);
+        Optional<CustomerEntity> customerOptional = service.getCustomer(customerId);
         if (!customerOptional.isPresent())
             return ResponseEntity.notFound().build();
         Customer customer = customerOptional.map(assembler::toModel).get();
@@ -78,7 +78,7 @@ public class CustomerController implements CustomerApi {
     @Override
     public ResponseEntity<Void> updateCustomer(@PathVariable UUID customerId, @RequestBody Customer customer) {
 
-        Optional<CustomerEntity> customerOptional = service.getCustomerById(customerId);
+        Optional<CustomerEntity> customerOptional = service.getCustomer(customerId);
         if (!customerOptional.isPresent())
             return ResponseEntity.notFound().build();
         // TODO Keep existing field values not modified.

@@ -69,7 +69,7 @@ paths:
       - customer
       summary: Find customer by ID
       description: Returns a single customer
-      operationId: getCustomerById
+      operationId: getCustomer
       parameters:
       - name: customerId
         in: path
@@ -95,7 +95,7 @@ paths:
       tags:
       - customer
       summary: Deletes a customer
-      operationId: deleteCustomerById
+      operationId: deleteCustomer
       parameters:
       - name: customerId
         in: path
@@ -264,7 +264,7 @@ paths:
       tags:
       - user
       summary: Get user by user name
-      operationId: getUserById
+      operationId: getUser
       parameters:
       - name: userId
         in: path
@@ -319,7 +319,7 @@ paths:
       - user
       summary: Delete user
       description: This can only be done by the logged in user.
-      operationId: deleteUserById
+      operationId: deleteUser
       parameters:
         - name: userId
           in: path

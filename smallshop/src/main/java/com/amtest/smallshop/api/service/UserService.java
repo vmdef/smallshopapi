@@ -13,9 +13,9 @@ public interface UserService {
 
     public Iterable<UserEntity> getUsers();
 
-    public Optional<UserEntity> getUserById(UUID userId);
+    public Optional<UserEntity> getUser(UUID userId);
 
-    void deleteUserById(UUID customerId);
+    void deleteUser(UUID customerId);
 
     Optional<SignedInUser> createUser(User user);
 
