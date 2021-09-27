@@ -9,8 +9,6 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface UserRepository extends CrudRepository<UserEntity, UUID> {
 
-    Optional<UserEntity> getUserById(UUID userId);
-
     Optional<UserEntity> findByUsername(String username);
 
     @Query(value = "select count(u.*) from smallshop.user u where u.username = :username", nativeQuery = true)

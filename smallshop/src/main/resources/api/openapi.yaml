@@ -204,7 +204,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SignedInUser'
+                $ref: '#/components/schemas/User'
   /api/v1/users/login:
     get:
       tags:
@@ -412,10 +412,7 @@ components:
     User:
       description: A Small Shop CRM user
       required:
-        - id
         - username
-        - password
-        - adminStatus
       type: object
       properties:
         id:
@@ -427,6 +424,7 @@ components:
           type: string
         adminStatus:
           type: boolean
+          default: false
     SignInReq:
       description: Request body for Sign-in
       type: object

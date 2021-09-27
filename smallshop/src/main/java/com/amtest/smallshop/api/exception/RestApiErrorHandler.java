@@ -269,6 +269,19 @@ public class RestApiErrorHandler {
         return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
     }
 
+    @ExceptionHandler(UserNotFoundException.class)
+    public ResponseEntity<Error> handleUserNotFoundException(HttpServletRequest request,
+                                                                 UserNotFoundException ex, Locale locale) {
+        Error error = ErrorUtils
+                .createError(
+                        String.format("%s %s", ErrorCode.USER_NOT_FOUND.getErrMsgKey(), ex.getMessage()),
+                        ex.getErrorCode(),
+                        HttpStatus.NOT_FOUND.value()).setUrl(request.getRequestURL().toString())
+                .setReqMethod(request.getMethod())
+                .setTimestamp(Instant.now());
+        return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
+    }
+
     @ExceptionHandler(ItemNotFoundException.class)
     public ResponseEntity<Error> handleItemNotFoundException(HttpServletRequest request,
                                                              ItemNotFoundException ex, Locale locale) {

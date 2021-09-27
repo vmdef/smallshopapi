@@ -47,13 +47,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public Optional<SignedInUser> createUser(User user) {
+    public Optional<UserEntity> createUser(User user) {
         Integer count = repository.countByUsername(user.getUsername());
         if (count > 0) {
             throw new GenericAlreadyExistsException("Use different username.");
         }
-        UserEntity userEntity = repository.save(toEntity(user));
-        return Optional.of(createSignedUserWithRefreshToken(userEntity));
+        return Optional.of(repository.save(toEntity(user)));
     }
 
     @Override
@@ -146,13 +145,18 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void deleteUser(UUID userId) {
-        repository.deleteById(userId);
+        Optional<UserEntity> user = repository.findById(userId);
+        if (user.isPresent()) {
+            repository.deleteById(userId);
+        } else {
+            throw new UserNotFoundException(String
+                    .format("User with id %s doesn't exist", userId.toString()));
+        }
     }
 
     @Override
     @Transactional
     public UserEntity saveUser(User user) {
-        // TODO Update only modified fields (PATCH)
         return repository.save(toEntity(user));
     }
 }

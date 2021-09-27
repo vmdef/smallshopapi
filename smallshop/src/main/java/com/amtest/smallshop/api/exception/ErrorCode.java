@@ -21,7 +21,8 @@ public enum ErrorCode {
     GENERIC_ALREADY_EXISTS("ERR-0013", "Already exists."),
     ACCESS_DENIED("ERR-0014", "Access Denied."),
     UNAUTHORIZED("ERR-0015", "Unauthorized"),
-    METHOD_ARGUMENT_TYPE_MISTMATCH("ERR-0016", "Wrong argument type");
+    METHOD_ARGUMENT_TYPE_MISTMATCH("ERR-0016", "Wrong argument type"),
+    USER_NOT_FOUND("ERR-0017", "Requested user not found.");
 
     private String errCode;
     private String errMsgKey;
