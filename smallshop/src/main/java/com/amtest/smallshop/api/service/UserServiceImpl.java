@@ -107,7 +107,6 @@ public class UserServiceImpl implements UserService {
     private UserEntity toEntity(User user) {
         UserEntity userEntity = new UserEntity();
         BeanUtils.copyProperties(user, userEntity);
-        // TODO check if the password is already encrypted
         userEntity.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         if (user.getAdminStatus() == true) {
             userEntity.setRole(RoleEnum.ADMIN);

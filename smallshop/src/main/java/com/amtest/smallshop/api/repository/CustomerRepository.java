@@ -10,7 +10,7 @@ import java.util.UUID;
 
 public interface CustomerRepository extends CrudRepository<CustomerEntity, UUID> {
 
-    @Query("select c from CustomerEntity c where c.name = :name")
-    Optional<CustomerEntity> findCustomerByName(String name);
+    @Query("select c from CustomerEntity c where c.name = :name and c.surname = :surname")
+    Optional<CustomerEntity> findCustomerByName(String name, String surname);
 
 }

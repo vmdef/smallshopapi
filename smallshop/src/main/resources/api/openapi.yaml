@@ -164,6 +164,9 @@ paths:
                   type: string
                   description: file to upload
                   format: binary
+            encoding:
+              image:
+                contentType: image/png, image/jpeg
       responses:
         200:
           description: successful operation
@@ -468,14 +471,3 @@ components:
           type: string
         message:
           type: string
-  securitySchemes:
-    smallshop_auth:
-      type: oauth2
-      flows:
-        implicit:
-          authorizationUrl: http://smallshop.api/oauth/dialog
-          scopes:
-            write:customers: modify customers
-            read:customers: read customers
-            write:users: modify users
-            read:users: read users

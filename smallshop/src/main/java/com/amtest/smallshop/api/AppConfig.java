@@ -22,13 +22,8 @@ import org.springframework.web.filter.ShallowEtagHeaderFilter;
 @Configuration
 @EnableTransactionManagement
 @EnableJpaRepositories
-@EnableJpaAuditing(auditorAwareRef = "auditorAware")
-public class AppConfig {
 
-    @Bean
-    public AuditorAware<String> auditorAware(){
-        return new AuditorAwareImpl();
-    }
+public class AppConfig {
 
     @Bean
     public ShallowEtagHeaderFilter shallowEtagHeaderFilter() {
