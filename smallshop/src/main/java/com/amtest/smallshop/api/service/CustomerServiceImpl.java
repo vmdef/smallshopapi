@@ -1,20 +1,18 @@
 package com.amtest.smallshop.api.service;
 
+import com.amtest.smallshop.api.entity.UserEntity;
 import com.amtest.smallshop.api.exception.CustomerNotFoundException;
 import com.amtest.smallshop.api.exception.GenericAlreadyExistsException;
 import com.amtest.smallshop.api.model.Customer;
 import com.amtest.smallshop.api.repository.CustomerRepository;
 import com.amtest.smallshop.api.entity.CustomerEntity;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
+import org.springframework.beans.BeanWrapper;
+import org.springframework.beans.BeanWrapperImpl;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.security.Principal;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 public class CustomerServiceImpl implements CustomerService {
@@ -48,18 +46,17 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     @Transactional
     public Optional<CustomerEntity> createCustomer(Customer customer) {
-        //TODO we need a check to avoid duplicate customers (email)
-/*        if (Objects.nonNull(repository.findCustomerByName(customer.getName()))) {
-            throw new GenericAlreadyExistsException("Use different username and email.");
-        }*/
+        Optional<CustomerEntity> existentCustomer = repository.findCustomerByName(customer.getName(), customer.getSurname());
+        if (existentCustomer.isPresent()) {
+            throw new GenericAlreadyExistsException("Use different name or surname.");
+        }
         return Optional.of(repository.save(toEntity(customer)));
     }
 
     @Override
     @Transactional
-    public CustomerEntity saveCustomer(Customer customer) {
-        // TODO Update only modified fields
-        return repository.save(toEntity(customer));
+    public Optional<CustomerEntity> saveCustomer(Customer customer) {
+        return Optional.of(repository.save(toEntity(customer)));
     }
 
     private CustomerEntity toEntity(Customer customer) {

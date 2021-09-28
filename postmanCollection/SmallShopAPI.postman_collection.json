@@ -958,7 +958,7 @@
 								{
 									"key": "image",
 									"type": "file",
-									"src": "/Users/vmdef/Pictures/profesor.jpg"
+									"src": "profesor.jpg"
 								}
 							]
 						},
@@ -1119,7 +1119,20 @@
 					"response": []
 				},
 				{
-					"name": "/users/{uuid} - Get non existing user",
+					"name": "/users/{uuid} - Get wrong user UUID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Forbidden\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([403]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -1180,6 +1193,19 @@
 				},
 				{
 					"name": "/users/{uuid} - Get existing user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Forbidden\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([403]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -1240,6 +1266,19 @@
 				},
 				{
 					"name": "/users Get all users",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Forbidden\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([403]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -1299,6 +1338,19 @@
 				},
 				{
 					"name": "/users/{uuid} - Delete existing user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Forbidden\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([403]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -1356,6 +1408,19 @@
 				},
 				{
 					"name": "/users - Create new user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Forbidden\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([403]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -1387,7 +1452,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"newuser2\",\r\n    \"password\": \"newpassword\",\r\n    \"adminStatus\": false\r\n}",
+							"raw": "{\r\n    \"username\": \"newuser2\",\r\n    \"password\": \"newpassword\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1412,6 +1477,19 @@
 				},
 				{
 					"name": "/user - Update user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Forbidden\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([403]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -1531,7 +1609,20 @@
 					"response": []
 				},
 				{
-					"name": "/users/{uuid} - Get non existing user",
+					"name": "/users/{uuid} - Get non existent user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {",
+									"    pm.response.to.have.status(404);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -1574,7 +1665,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/v1/users/618ffaff-cbcd-48d4-8848-a15601e6725v",
+							"raw": "http://localhost:8080/api/v1/users/618ffaff-cbcd-48d4-8848-a15601e6725b",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -1584,7 +1675,7 @@
 								"api",
 								"v1",
 								"users",
-								"618ffaff-cbcd-48d4-8848-a15601e6725v"
+								"618ffaff-cbcd-48d4-8848-a15601e6725b"
 							]
 						}
 					},
@@ -1592,6 +1683,19 @@
 				},
 				{
 					"name": "/users/{uuid} - Get existing user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -1652,6 +1756,19 @@
 				},
 				{
 					"name": "/users Get all users",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -1708,6 +1825,218 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "/users - Create new user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"pm.collectionVariables.set(\"newid\", jsonData.id);",
+									"pm.collectionVariables.set(\"newusername\", jsonData.username);",
+									"pm.test(\"Successful POST request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "If-None-Match",
+								"value": "098e97de3b61db55286f5f2812785116f",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"newuser\",\r\n    \"password\": \"New@Pass1\" \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/user - Update user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful PUT request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([204]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "If-None-Match",
+								"value": "098e97de3b61db55286f5f2812785116f",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"{{newusername}}\",\r\n    \"adminStatus\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/users/{{newid}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"{{newid}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/users/{uuid} - Delete existing user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 204\", function () {",
+									"    pm.response.to.have.status(204);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "If-None-Match",
+								"value": "098e97de3b61db55286f5f2812785116f",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/users/{{newid}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"{{newid}}"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		}
@@ -1730,6 +2059,16 @@
 					""
 				]
 			}
+		}
+	],
+	"variable": [
+		{
+			"key": "newid",
+			"value": ""
+		},
+		{
+			"key": "newusername",
+			"value": ""
 		}
 	]
 }

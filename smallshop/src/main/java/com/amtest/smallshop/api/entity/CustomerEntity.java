@@ -1,13 +1,7 @@
 package com.amtest.smallshop.api.entity;
 
 import com.amtest.smallshop.api.security.Auditable;
-import org.springframework.data.annotation.CreatedBy;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedBy;
-import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import java.sql.Timestamp;
 import java.util.UUID;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -32,22 +26,6 @@ public class CustomerEntity extends Auditable<String> {
 
     @Column(name = "PHOTO")
     private String photo;
-
-/*    @Column(name = "created_date", nullable = false, updatable = false)
-    @CreatedDate
-    private Timestamp createdDate;
-
-    @Column(name = "modified_date")
-    @LastModifiedDate
-    private Timestamp modifiedDate;
-
-    @Column(name = "created_by")
-    @CreatedBy
-    private String createdBy;
-
-    @Column(name = "modified_by")
-    @LastModifiedBy
-    private String modifiedBy;*/
 
     public UUID getId() {
         return id;
@@ -92,7 +70,7 @@ public class CustomerEntity extends Auditable<String> {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
-                ", phone='" + photo + '\'' +
+                ", photo='" + photo + '\'' +
                 '}';
     }
 
