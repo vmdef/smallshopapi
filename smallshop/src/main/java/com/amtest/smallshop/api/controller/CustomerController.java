@@ -10,7 +10,6 @@ import com.amtest.smallshop.api.service.CustomerService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.StringUtils;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -62,16 +61,19 @@ public class CustomerController implements CustomerApi {
             return ResponseEntity.notFound().build();
         Customer customer = customerOptional.map(assembler::toModel).get();
         String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
-        String uploadDir = "user-photos/" + customerId;
+        if (fileName != "") {
+            String filePath = "user-photos/" + customerId;
 
-        customer.setPhoto(uploadDir);
-        service.saveCustomer(customer);
-
-        try {
-            FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
-        } catch (IOException e) {
-            e.printStackTrace();
+            try {
+                FileUploadUtil.saveFile(filePath, fileName, multipartFile);
+                customer.setPhoto(filePath);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            customer.setPhoto("");
         }
+        service.saveCustomer(customer);
         return accepted().build();
     }
 
