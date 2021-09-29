@@ -86,7 +86,7 @@ public class AuthController implements UserApi {
     @Override
     public ResponseEntity<Void> deleteUser(UUID userId) {
         service.deleteUser(userId);
-        return accepted().build();
+        return noContent().build();
     }
 
     @Override

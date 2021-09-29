@@ -164,6 +164,7 @@ paths:
                   type: string
                   description: file to upload
                   format: binary
+                  nullable: true
             encoding:
               image:
                 contentType: image/png, image/jpeg
